@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,7 +15,6 @@ import java.time.LocalDate;
 public class Transaction {
     private String description;
     private BigDecimal amount;
-    private LocalDate Transaction;
     private transactionType type;
     private String category;
     private String bankAccount;

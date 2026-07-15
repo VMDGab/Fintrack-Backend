@@ -2,29 +2,42 @@ package com.vmdgab.Spring_App.Controllers;
 
 import com.vmdgab.Spring_App.domain.Transaction;
 import com.vmdgab.Spring_App.services.TransactionService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/transaction")
+@RequiredArgsConstructor
 public class TransactionController {
-    @Autowired
-    private TransactionService transactionService;
 
-    @GetMapping("/transaction")
-    public String lancamentoWorks(){
-        return "Works";
+    private final TransactionService transactionService;
+
+    @GetMapping("")
+    public ResponseEntity<List<Transaction>> findAllTransactions(){
+        return new ResponseEntity<>(
+                transactionService.findAll(),
+                HttpStatus.OK
+        );
     }
 
-    @PostMapping("/newTransaction")
-    public Transaction newLancamento(@RequestBody Transaction body){
-        return transactionService.newTransaction(body);
+    @PostMapping("")
+    public ResponseEntity<Transaction> newLancamento(@RequestBody Transaction body){
+        return new ResponseEntity<>(
+                transactionService.newTransaction(body),
+                HttpStatus.CREATED
+        );
     }
 
-    @PutMapping("/editTransaction/{id}")
-    public Transaction editLancamento(@PathVariable("id") int id, @RequestParam(value = "filter", defaultValue = "nenhum") String filter, @RequestBody Transaction body){
-        return transactionService.editTransaction(id, body);
+    @PutMapping("/{id}")
+    public ResponseEntity<Transaction> editLancamento(@PathVariable("id") int id, @RequestParam(value = "filter", defaultValue = "nenhum") String filter, @RequestBody Transaction body){
+        return new ResponseEntity<>(
+                transactionService.editTransaction(id, body),
+                HttpStatus.OK
+        );
     }
 
 }
