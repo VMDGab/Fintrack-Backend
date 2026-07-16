@@ -1,7 +1,7 @@
 package com.vmdgab.Spring_App.database.models;
 
-import com.vmdgab.Spring_App.domain.TransactionStatus;
-import com.vmdgab.Spring_App.domain.transactionType;
+import com.vmdgab.Spring_App.enums.TransactionStatus;
+import com.vmdgab.Spring_App.enums.transactionType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +19,7 @@ import java.util.UUID;
 public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID transactionId;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -33,8 +33,6 @@ public class TransactionEntity {
     @Column(name = "bankAccount", nullable = false)
     private String bankAccount;
 
-    @Column(name = "paymentMethod", nullable = false)
-    private String paymentMethod;
 
     @Column(name = "card")
     private String card;
@@ -70,5 +68,5 @@ public class TransactionEntity {
 
     @ManyToOne
     @JoinColumn(name = "payment_method_id")
-    private PaymentMethodEntity payment_method;
+    private PaymentMethodEntity paymentMethod;
 }

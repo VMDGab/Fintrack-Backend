@@ -1,6 +1,7 @@
 package com.vmdgab.Spring_App.Controllers;
 
-import com.vmdgab.Spring_App.domain.Transaction;
+import com.vmdgab.Spring_App.database.models.TransactionEntity;
+import com.vmdgab.Spring_App.dto.TransactionDTO;
 import com.vmdgab.Spring_App.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,34 +11,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/v1/transaction")
 @RequiredArgsConstructor
 public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @GetMapping("")
-    public ResponseEntity<List<Transaction>> findAllTransactions(){
+    @GetMapping
+    public ResponseEntity<List<TransactionEntity>> findAllTransactions(){
         return new ResponseEntity<>(
                 transactionService.findAll(),
                 HttpStatus.OK
         );
     }
 
-    @PostMapping("")
-    public ResponseEntity<Transaction> newLancamento(@RequestBody Transaction body){
-        return new ResponseEntity<>(
-                transactionService.newTransaction(body),
-                HttpStatus.CREATED
-        );
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public void newLancamento(@RequestBody TransactionDTO transanction){
+        transactionService.newTransaction(transanction);
+
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Transaction> editLancamento(@PathVariable("id") int id, @RequestParam(value = "filter", defaultValue = "nenhum") String filter, @RequestBody Transaction body){
-        return new ResponseEntity<>(
-                transactionService.editTransaction(id, body),
-                HttpStatus.OK
-        );
-    }
 
 }

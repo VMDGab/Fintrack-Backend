@@ -1,13 +1,8 @@
 package com.vmdgab.Spring_App.database.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class PaymentMethodEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,6 +20,4 @@ public class PaymentMethodEntity {
     @Column( nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "payment_method")
-    private List<TransactionEntity> transactions = new ArrayList<>();
 }

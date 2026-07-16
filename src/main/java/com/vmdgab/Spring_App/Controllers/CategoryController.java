@@ -1,16 +1,15 @@
 package com.vmdgab.Spring_App.Controllers;
 
+import com.vmdgab.Spring_App.database.models.CategoryEntity;
+import com.vmdgab.Spring_App.dto.CategoryDTO;
 import com.vmdgab.Spring_App.services.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/v1/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -19,8 +18,15 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping("/newCategory")
-        public ResponseEntity<String> newCategory(@RequestBody String body){
-            return new ResponseEntity<>(categoryService.newCategory(body), HttpStatus.CREATED);
+    @GetMapping
+    public List<CategoryEntity> getAll(){
+        return categoryService.findAll();
+    }
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+        public void newCategory(@RequestBody CategoryDTO body){
+            categoryService.newCategory(body);
         }
 }

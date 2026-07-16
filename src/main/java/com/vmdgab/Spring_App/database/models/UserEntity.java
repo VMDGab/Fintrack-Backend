@@ -1,13 +1,8 @@
 package com.vmdgab.Spring_App.database.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,7 +11,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -30,8 +25,5 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<TransactionEntity> transactions = new ArrayList<>();
 
 }

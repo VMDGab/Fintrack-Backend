@@ -1,16 +1,12 @@
-package com.vmdgab.Spring_App.domain;
+package com.vmdgab.Spring_App.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @AllArgsConstructor
-public class Category {
-    private UUID id;
+public class PaymentMethodDTO {
     private String title;
-    private Boolean essential;
 }
