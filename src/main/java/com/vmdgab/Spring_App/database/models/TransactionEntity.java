@@ -1,7 +1,7 @@
 package com.vmdgab.Spring_App.database.models;
 
 import com.vmdgab.Spring_App.enums.TransactionStatus;
-import com.vmdgab.Spring_App.enums.transactionType;
+import com.vmdgab.Spring_App.enums.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,12 +27,12 @@ public class TransactionEntity {
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    private transactionType type;
+    private TransactionType type;
 
     @Column(name = "bankAccount", nullable = false)
     private String bankAccount;
-
 
     @Column(name = "card")
     private String card;
@@ -46,6 +46,7 @@ public class TransactionEntity {
     @Column(name = "essential", nullable = false)
     private Boolean essential;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private TransactionStatus status;
 

@@ -1,6 +1,6 @@
 package com.vmdgab.Spring_App.enums;
 
-public enum transactionType {
+public enum TransactionType {
     RECEITA,
     DESPESA,
     BENEFICIO
